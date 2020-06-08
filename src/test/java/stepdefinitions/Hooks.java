@@ -32,7 +32,7 @@ public class Hooks {
     // Clearing node's just in case any is running in the background.
     killJuiceShop();
     try {
-      juiceShopProcess = processBuilder.command("bash", "-c", "cd ../juice-shop ; npm start").start();
+      juiceShopProcess = processBuilder.command("CMD", "/c", "cd ../juice-shop && npm start").start();
       BufferedReader br = new BufferedReader(new InputStreamReader(juiceShopProcess.getInputStream()));
       String line = "";
       while((line = br.readLine()) != null) {
@@ -57,7 +57,7 @@ public class Hooks {
   }
   private void killJuiceShop(){
     try {
-      processBuilder.command("bash", "-c", "killall -9 node").start();
+      processBuilder.command("taskkill", "/f", "/im", "node.exe").start();
     } catch (IOException e) {
       e.printStackTrace();
     }
